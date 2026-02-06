@@ -1,0 +1,8 @@
+
+
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    // 'autoprefixer': {}, // Optional in v4, but good to keep if you support older browsers
+  },
+}

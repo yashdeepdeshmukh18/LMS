@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* In v4, you can override theme variables right here in CSS! 
+  Example: 
+*/
+@theme {
+  --color-primary: #ff0000;
+  --font-display: "Satoshi", "sans-serif";
+}

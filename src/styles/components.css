@@ -1,0 +1,175 @@
+@layer components {
+
+    /* ===== COURSE PLAYER ===== */
+
+    .course-page {
+        @apply flex gap-10 px-4 sm:px-8 lg:px-12 py-6 sm:py-10 bg-[#FCF7FF] overflow-y-auto;
+    }
+
+    .course-card {
+        @apply border border-purple-300 rounded-lg p-6 bg-[#FDF7FF] overflow-visible;
+    }
+
+    .course-title {
+        @apply text-xl text-purple-600 font-medium mb-4;
+    }
+
+    /* ===== ACTION ROW ===== */
+
+    /* ---------- DESKTOP DEFAULT (UNCHANGED) ---------- */
+
+    .course-actions {
+        @apply flex items-center justify-between text-sm text-gray-700 my-3;
+    }
+
+    .course-actions-left {
+        @apply flex items-center gap-4;
+    }
+
+    .course-actions-right {
+        @apply flex items-center gap-3;
+    }
+
+    .course-actions span,
+    .course-actions button {
+        @apply px-2 py-1 rounded cursor-pointer flex items-center gap-1;
+    }
+
+    .course-actions span:hover,
+    .course-actions button:hover {
+        @apply bg-purple-50;
+    }
+
+    /* MOBILE ACTION BAR FIX */
+    @media (max-width: 640px) {
+        .course-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            gap: 1rem;
+        }
+
+        .course-actions-left,
+        .course-actions-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: auto;
+        }
+
+        .course-actions span,
+        .course-actions button {
+            padding: 0;
+            background: none;
+        }
+    }
+
+
+    /* Visibility helpers */
+    .mobile-only {
+        display: none;
+    }
+
+    .desktop-only {
+        display: flex;
+    }
+
+    @media (max-width: 640px) {
+        .mobile-only {
+            display: block;
+        }
+
+        .desktop-only {
+            display: none;
+        }
+    }
+
+
+    /* ===== SIDEBAR ===== */
+
+    .sidebar {
+        @apply text-sm;
+    }
+
+    .sidebar-section-title {
+        @apply font-semibold text-black mb-1;
+    }
+
+    .sidebar-section-desc {
+        @apply text-sm text-gray-600 mb-4;
+    }
+
+    .sidebar-chapter {
+        @apply font-semibold text-black mb-3;
+    }
+
+    .sidebar-item-active {
+        @apply flex items-center gap-2 px-3 py-2 rounded-md bg-purple-200 text-purple-700 font-medium;
+    }
+
+    .sidebar-item {
+        @apply flex items-center gap-2 px-3 py-2 text-purple-500;
+    }
+
+    /* ===== TRANSCRIPT ===== */
+
+    .transcript-title {
+        @apply font-semibold text-black mb-2;
+    }
+
+    .transcript-text {
+        @apply text-sm leading-7 text-black;
+    }
+
+    /* Hide scrollbar by default */
+    .scroll-on-hover {
+        overflow-y: auto;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE / Edge */
+    }
+
+    /* Chrome, Safari */
+    .scroll-on-hover::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+
+    /* Show scrollbar on hover */
+    .scroll-on-hover:hover {
+        scrollbar-width: thin;
+        /* Firefox */
+    }
+
+    /* Chrome, Safari on hover */
+    .scroll-on-hover:hover::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .scroll-on-hover:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(156, 163, 175, 0.6);
+        /* gray-400 */
+        border-radius: 6px;
+    }
+
+    .scroll-on-hover:hover::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .page-fade {
+        animation: pageFadeIn 0.15s ease-in-out;
+    }
+
+    @keyframes pageFadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+}
