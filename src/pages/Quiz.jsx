@@ -33,7 +33,7 @@ const QuizPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FDF6FF]">
-        <Navbar/>
+       
         <div className="w-[85%] mx-auto min-h-screen bg-[#FBF3FF] p-6 flex gap-6">
             <QuestionSidebar />
 
@@ -44,7 +44,7 @@ const QuizPage = () => {
             />
 
         </div>
-        <Footer/>
+      
     </div>
   );
 };

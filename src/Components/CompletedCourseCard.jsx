@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const CompletedCourseCard = ({ course }) => {
+
+  const navigate = useNavigate();
+  const { profile } = useContext(AuthContext);
+
   return (
     <div className="bg-white px-6 py-4 rounded-2xl shadow-lg overflow-hidden border border-[#8B1CC342]">
       
@@ -47,7 +53,7 @@ const CompletedCourseCard = ({ course }) => {
             View Course
           </button>
 
-          <button className="mt-5 flex-1 border border-[#8B1CC342] shadow-[0px_4px_4px_0px_#00000040] bg-[linear-gradient(90deg,#4846C6_0%,#DD9AFF_100%)] text-white py-4 rounded-lg font-medium transition ease-out duration-[340ms] hover:scale-105">
+          <button onClick={() => navigate(`/certificate/${profile.id}/${course.id}`)}  className="mt-5 flex-1 border border-[#8B1CC342] shadow-[0px_4px_4px_0px_#00000040] bg-[linear-gradient(90deg,#4846C6_0%,#DD9AFF_100%)] text-white py-4 rounded-lg font-medium transition ease-out duration-[340ms] hover:scale-105">
             View Certificate 
           </button>
         </div>

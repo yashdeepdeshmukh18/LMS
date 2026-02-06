@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../Components/Navbar.jsx";
 import Footer from "../Components/Footer.jsx";
 import { MdOutlineShare, MdOutlineSearchOff } from "react-icons/md";
@@ -22,10 +22,18 @@ import practiceIcon from "../assets/icons/practiceProblems.svg";
 import instructorImgPlaceholder from "../assets/instructor.png";
 import starIcon from "../assets/icons/star.svg";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 const CourseDetail = () => {
   const { courseId } = useParams(); // Get ID from URL
   const navigate = useNavigate();
+
+  // Get myCourses from context to check status
+  const { myCourses } = useContext(AuthContext); 
+
+  // Check if current course ID exists in user's enrolled list
+  // Note: Ensure types match (string vs string)
+  const isEnrolled = myCourses?.some((item) => item.course.id === courseId);
 
   // --- 1. STATE MANAGEMENT ---
   const [course, setCourse] = useState(null); // Main Course Data
@@ -134,7 +142,7 @@ const CourseDetail = () => {
     try {
       await enrollCourse(course.id);
       // alert("Enrolled Successfully!");
-      navigate(`/course/${courseId}/learn`)
+      navigate(`/payment/${courseId}`);
     } catch (e) {
       alert(e.message);
     }
@@ -184,7 +192,6 @@ const CourseDetail = () => {
   // --- 7. RENDER: MAIN CONTENT ---
   return (
     <div className="bg-[#FEF7FF] min-h-screen">
-      <Navbar />
 
       {/* HERO SECTION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -200,13 +207,23 @@ const CourseDetail = () => {
             {course.description || "Master this subject with our comprehensive curriculum."}
           </p>
 
+          {/* Enrolled vs Not Enrolled Button */}
           <div className="flex items-center gap-4 mb-4 flex-wrap">
-            <button
-                onClick={()=> handleCouseEnrollment()}
-                className="bg-[#c247d7] hover:bg-[#bb78c6] transition text-white px-5 py-3 rounded-lg text-sm sm:text-base"
+            {isEnrolled ? (
+              <button
+                onClick={() => navigate(`/course/${courseId}/learn`)}
+                className="bg-green-600 hover:bg-green-700 transition text-white px-6 py-3 rounded-lg text-sm sm:text-base font-semibold shadow-md"
+              >
+                Continue Learning
+              </button>
+            ) : (
+              <button
+                onClick={() => handleCouseEnrollment()}
+                className="bg-[#c247d7] hover:bg-[#bb78c6] transition text-white px-6 py-3 rounded-lg text-sm sm:text-base font-semibold shadow-md"
               >
                 Enroll for ₹{course.price}
-            </button>
+              </button>
+            )}
 
             <button className="w-10 h-10 bg-[#F6E0FFDE] rounded-full border flex items-center justify-center hover:bg-purple-200 transition">
               <MdOutlineShare className="text-xl text-purple-700" />
@@ -363,7 +380,7 @@ const CourseDetail = () => {
                   <h3 className="text-xl sm:text-2xl font-semibold mb-6 text-gray-800">Learner reviews</h3>
                   <div className="flex font-Poppins items-center gap-3 mb-6">
                     <img src={starIcon} alt="star" className="w-8"/>
-                    <span className="text-4xl font-bold text-black">4.8</span>
+                    <span className="text-4xl font-bold text-black">5.0</span>
                     <p className="text-sm text-black">({reviews.length} reviews)</p>
                   </div>
                 </div>
@@ -405,7 +422,6 @@ const CourseDetail = () => {
 
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

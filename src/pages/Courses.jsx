@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
 import Search from "../assets/icons/search.svg";
 import { CourseContext } from "../context/CourseContext";
 import CategorySection from "../Components/CategorySection"; // Import the component we made above
@@ -12,7 +10,6 @@ const Courses = () => {
 
   return (
     <div className="bg-[#FBF5FF] min-h-screen">
-      <Navbar />
 
       <div className="max-w-7xl mx-auto py-10 sm:py-12 px-4 sm:px-6">
         
@@ -79,7 +76,6 @@ const Courses = () => {
         )}
 
       </div>
-      <Footer />
     </div>
   );
 };

@@ -3,21 +3,21 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import logo from "../assets/logo.png";
 
-import { AuthContext } from "../context/AuthContext"; 
+import { AuthContext } from "../context/AuthContext";
+import { NavbarThemeContext } from "../context/themes/navbarThemes";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(true);
+  console.log("navbar");
 
-  const { session,setSession, profile, handleGoogleLogin } = useContext(AuthContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const { session, setSession, profile, handleGoogleLogin } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
-
- 
-
- 
 
   const handleLogout = () => {
     localStorage.removeItem("sb-nebwjgdwtdpqrwokjszl-auth-token");
@@ -25,214 +25,210 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const {
+    bg,
+    text,
+    logoText,
+    menuText,
+    hoverText,
+    border,
+    buttonBg,
+    dropdownBg,
+    mobileBg,
+  } = useContext(NavbarThemeContext);
 
   return (
-    <nav className="w-full bg-[#F8CDFF] px-4 sm:px-6 lg:px-10 py-3">
+    <nav
+      className={`w-full ${bg} ${text} px-4 sm:px-6 lg:px-10 py-3 transition-colors duration-300`}
+    >
+      {" "}
       <div className="max-w-7xl mx-auto flex items-center">
-        
-        {/* Left: Hamburger + Logo */}
-        <div className="flex w-full mx-auto  items-center gap-3">
-          {/* Hamburger Button (Mobile Only) */}
-          <button
-            className="md:hidden text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            ☰
-          </button>
-          
-          <div className="flex gap-2">
+        {" "}
+        {/* Left Section */}{" "}
+        <div className="flex w-full mx-auto items-center gap-3">
+          {" "}
+          {/* Hamburger */}{" "}
+          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+            {" "}
+            ☰{" "}
+          </button>{" "}
+          {/* Logo */}{" "}
+          <div className="flex gap-2 items-center">
+            {" "}
             <img
               src={logo}
-              alt="SmaranAI Logo"
+              alt="Logo"
               className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 object-contain"
-            />
-
+            />{" "}
             <div className="leading-tight">
-              <h1 className="text-sm sm:text-base lg:text-lg font-semibold text-purple-700">
-                SmaranAI.in
-              </h1>
-              <p className="text-[10px] sm:text-xs text-gray-500">
-                Learn Smart with Smaran AI
-              </p>
-            </div>
-          </div>
-
-      
-        {/* Desktop Menu - CENTERED */}
-        <div className="hidden md:flex justify-center w-2/3">
-          <ul className="flex items-center gap-8 text-sm lg:text-base font-medium text-gray-700">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `pb-1 ${
-                    isActive
-                      ? "border-b-2 border-purple-700 text-purple-700"
-                      : "hover:text-purple-600"
-                  }`
-                }
+              {" "}
+              <h1
+                className={`text-sm sm:text-base lg:text-lg font-semibold ${logoText}`}
               >
-                HOME
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/courses"
-                className={({ isActive }) =>
-                  `pb-1 ${
-                    isActive
-                      ? "border-b-2 border-purple-700 text-purple-700"
-                      : "hover:text-purple-600"
-                  }`
-                }
-              >
-                COURSES
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  `pb-1 ${
-                    isActive
-                      ? "border-b-2 border-purple-700 text-purple-700"
-                      : "hover:text-purple-600"
-                  }`
-                }
-              >
-                DASHBOARD
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-
-
-        {/* Right Section */}
-        <div className="flex  items-center gap-3 ">
-          <button className="font-openSans bg-purple-500 hover:bg-purple-600 text-white text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg flex items-center gap-1 transition">
-            Premium <span>👑</span>
-          </button>
-
-          {/* User Avatar */}
-
-          {!session ? (
+                {" "}
+                SmaranAI.in{" "}
+              </h1>{" "}
+              <p className="text-[10px] sm:text-xs opacity-80">
+                {" "}
+                Learn Smart with Smaran AI{" "}
+              </p>{" "}
+            </div>{" "}
+          </div>{" "}
+          {/* Desktop Menu */}{" "}
+          <div className="hidden md:flex justify-center w-2/3">
+            {" "}
+            <ul
+              className={`flex items-center gap-8 text-sm lg:text-base font-medium ${menuText}`}
+            >
+              {" "}
+              {["/", "/courses", "/dashboard"].map((path, i) => {
+                const names = ["HOME", "COURSES", "DASHBOARD"];
+                return (
+                  <li key={path}>
+                    {" "}
+                    <NavLink
+                      to={path}
+                      className={({ isActive }) =>
+                        `pb-1 transition ${isActive ? `border-b-2 ${border}` : hoverText}`
+                      }
+                    >
+                      {" "}
+                      {names[i]}{" "}
+                    </NavLink>{" "}
+                  </li>
+                );
+              })}{" "}
+            </ul>{" "}
+          </div>{" "}
+          {/* Right Section */}{" "}
+          <div className="flex items-center gap-3">
+            {" "}
+            {/* Premium */}{" "}
             <button
-               onClick={handleGoogleLogin}
-               className="bg-white text-purple-700 hover:bg-purple-50 border border-purple-200 font-medium text-xs sm:text-sm px-4 py-2 rounded-lg transition shadow-sm"
-             >
-               Login
-             </button>
-          ) : (
+              className={`${buttonBg} text-white text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg flex items-center gap-1 transition`}
+            >
+              {" "}
+              Premium 👑{" "}
+            </button>{" "}
+            {/* Auth Section */}{" "}
+            {!session ? (
+              <button
+                onClick={handleGoogleLogin}
+                className="bg-white text-purple-700 hover:bg-purple-50 border border-purple-200 font-medium text-xs sm:text-sm px-4 py-2 rounded-lg transition shadow-sm"
+              >
+                {" "}
+                Login{" "}
+              </button>
+            ) : (
               <div className="relative">
-
+                {" "}
+                {/* Avatar Button */}{" "}
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
                   className="flex items-center gap-1"
                 >
-
-                {profile?.avatar_url ? (
-                 <img
-                   src={profile.avatar_url}
-                   alt="User Avatar"
-                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border-2 border-white shadow-sm cursor-pointer hover:opacity-90"
-                 />
-               ) : (
-                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold cursor-pointer border-2 border-white shadow-sm">
-                  
-                   {/* LOGIC: Check if name exists, otherwise show Spinner */}
-                   {profile?.full_name ? (
-                     profile.full_name.charAt(0).toUpperCase()
-                   ) : (
-                     // Loader (Spinner)
-                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                   )}
-
-                 </div>
-               )}
-
-                { profileOpen ?
-                  <ChevronUp size={16} />
-                 : <ChevronDown size={16} />
-                }
-                </button> 
-
-
+                  {" "}
+                  {profile?.avatar_url ? (
+                    <img
+                      src={profile.avatar_url}
+                      alt="User"
+                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border-2 border-white shadow-sm"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold border-2 border-white shadow-sm">
+                      {" "}
+                      {profile?.full_name ? (
+                        profile.full_name.charAt(0).toUpperCase()
+                      ) : (
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      )}{" "}
+                    </div>
+                  )}{" "}
+                  {profileOpen ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}{" "}
+                </button>{" "}
+                {/* Dropdown */}{" "}
                 {profileOpen && (
-                  <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg py-2 z-50">
-                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
-                      Profile
-                    </Link>
-                    <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                      Settings
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                      Help Center
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
-                    onClick={handleLogout} >
-                      Log Out
-                    </button>
+                  <div
+                    className={`absolute right-0 mt-2 w-44 ${dropdownBg} rounded-xl shadow-lg py-2 z-50`}
+                  >
+                    {" "}
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-black/10 transition"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      {" "}
+                      Profile{" "}
+                    </Link>{" "}
+                    <Link
+                      to="/settings"
+                      className="block px-4 py-2 hover:bg-black/10 transition"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      {" "}
+                      Settings{" "}
+                    </Link>{" "}
+                    <Link
+                      to="/help"
+                      className="block px-4 py-2 hover:bg-black/10 transition"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      {" "}
+                      Help Center{" "}
+                    </Link>{" "}
+                    <div className="border-t my-1 opacity-30"></div>{" "}
+                    <button
+                      className="block w-full text-left px-4 py-2 text-red-500 hover:bg-red-50 transition font-medium"
+                      onClick={() => {
+                        setProfileOpen(false);
+                        handleLogout();
+                      }}
+                    >
+                      {" "}
+                      Log Out{" "}
+                    </button>{" "}
                   </div>
-                )}
+                )}{" "}
               </div>
-      
-          )}
-
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
+            )}{" "}
+          </div>{" "}
+        </div>{" "}
+      </div>{" "}
+      {/* Mobile Menu */}{" "}
       {menuOpen && (
-        <div className="md:hidden absolute top-14 bg-white rounded-lg shadow-lg py-4 px-6 space-y-4 text-sm font-medium text-gray-700">
-          <div>
-            <NavLink
-              to="/"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? "text-purple-700 font-semibold" : ""
-              }
-            >
-              HOME
-            </NavLink>
-          </div>
-          
-          <div>
-            <NavLink
-              to="/courses"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? "text-purple-700 font-semibold" : ""
-              }
-            >
-              COURSES
-            </NavLink>
-          </div>
-
-          <div>
-            <NavLink
-              to="/dashboard"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive ? "text-purple-700 font-semibold" : ""
-              }
-            >
-              DASHBOARD
-            </NavLink>
-          </div>
-
+        <div
+          className={`md:hidden absolute top-14 left-4 right-4 ${mobileBg} rounded-lg shadow-lg py-4 px-6 space-y-4 text-sm font-medium`}
+        >
+          {" "}
+          {["/", "/courses", "/dashboard"].map((path, i) => {
+            const names = ["HOME", "COURSES", "DASHBOARD"];
+            return (
+              <div key={path}>
+                {" "}
+                <NavLink
+                  to={path}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    isActive ? `font-semibold ${border}` : ""
+                  }
+                >
+                  {" "}
+                  {names[i]}{" "}
+                </NavLink>{" "}
+              </div>
+            );
+          })}{" "}
         </div>
-      )}
-      </div>
+      )}{" "}
     </nav>
   );
 };
 
 export default Navbar;
-
-
-
 
 // import React, { useState, useContext } from "react";
 // import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -250,8 +246,6 @@ export default Navbar;
 
 //   const navigate = useNavigate();
 
- 
-
 //   const handleLogin = () => {
 //     localStorage.setItem("isLoggedIn", "true");
 //     setIsLoggedIn(true);
@@ -266,7 +260,7 @@ export default Navbar;
 //   return (
 //     <nav className="w-full bg-[#F8CDFF] px-4 sm:px-6 lg:px-10 py-3">
 //       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
+
 //         {/* Left: Logo */}
 //         <div className="flex items-center gap-2">
 //           <Link to="/" className="flex items-center gap-2">
@@ -333,7 +327,7 @@ export default Navbar;
 //                 />
 //               ) : (
 //                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold cursor-pointer border-2 border-white shadow-sm">
-                  
+
 //                   {/* LOGIC: Check if name exists, otherwise show Spinner */}
 //                   {profile?.full_name ? (
 //                     profile.full_name.charAt(0).toUpperCase()

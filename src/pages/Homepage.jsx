@@ -8,9 +8,7 @@ import Footer from "../Components/Footer";
 const HomePage = () => {
   return (
     <div className="min-h-screen">
-      <Navbar />
       <HeroSection />
-      <Footer />
     </div>
   );
 };

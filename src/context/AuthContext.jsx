@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }) => {
         session,
         setSession,
         profile,
+        setProfile,
         myCourses,
         handleGoogleLogin,
       }}
