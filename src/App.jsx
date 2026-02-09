@@ -141,6 +141,9 @@ import CoursePlayer from './pages/CoursePlayer';
 import TextbookReading from './pages/TextbookReading';
 import Assignment from './pages/Assignment';
 
+// themes
+import {CoursesThemeProvider} from "./context/themes/coursesThemes"
+
 function App() {
   return (
     <div className="App">
@@ -152,7 +155,12 @@ function App() {
            ========================================= */}
         <Route element={<MainLayout />}>
             <Route path="/" element={<Homepage />}/>
-            <Route path="/courses" element={<Courses />}/>
+            <Route path="/courses" element={
+                                    <CoursesThemeProvider>
+
+                                      <Courses />
+                                    </CoursesThemeProvider>
+                                     }/>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/view-course/:courseId" element={<CourseDetail />} />
             <Route path="/payment/:courseId" element={<PaymentPage />} />
