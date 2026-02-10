@@ -143,6 +143,12 @@ import Assignment from './pages/Assignment';
 
 // themes
 import {CoursesThemeProvider} from "./context/themes/coursesThemes"
+import { DashboardThemeProvider } from "./context/themes/dashboardThemes";
+import { CourseDetailThemeProvider } from "./context/themes/courseDetailThemes";
+
+
+
+
 
 function App() {
   return (
@@ -161,8 +167,23 @@ function App() {
                                       <Courses />
                                     </CoursesThemeProvider>
                                      }/>
-            <Route path="/dashboard" element={<Dashboard />}/>
-            <Route path="/view-course/:courseId" element={<CourseDetail />} />
+            <Route
+                path="/dashboard"
+                element={
+                  <DashboardThemeProvider>
+                    <Dashboard />
+                  </DashboardThemeProvider>
+                }
+              />
+            <Route
+              path="/view-course/:courseId"
+              element={
+                <CourseDetailThemeProvider>
+                  <CourseDetail />
+                </CourseDetailThemeProvider>
+              }
+            />
+
             <Route path="/payment/:courseId" element={<PaymentPage />} />
             <Route path="/certificate/:userId/:courseId" element={<CertificatePage />} />
             <Route path="/profile" element={<ProfilePage /> } />

@@ -174,45 +174,56 @@ import { useNavigate } from 'react-router-dom';
 import Dashcard from '../Components/Dashcard';
 import CompletedCourseCard from "../Components/CompletedCourseCard";
 import { AuthContext } from '../context/AuthContext';
-import { getStudentProgressMap } from '../api/progress'; // Ensure this file exists
+import { getStudentProgressMap } from '../api/progress';
+
+import { DashboardThemeContext } 
+  from "../context/themes/dashboardThemes";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("inProgress");
-  
-  // State to hold the calculated progress % for each course
-  const [progressMap, setProgressMap] = useState({}); 
+
+  const [progressMap, setProgressMap] = useState({});
   const [loadingProgress, setLoadingProgress] = useState(true);
 
-  // Get data from Context
   const { profile, myCourses } = useContext(AuthContext);
 
-  // --- 1. FETCH PROGRESS ON MOUNT ---
+  // 🎨 Theme
+  const {
+    pageBg,
+    heading,
+    cardBg,
+    cardBorder,
+    avatarBg,
+    textPrimary,
+    textSecondary,
+    tabActive,
+    tabInactive,
+    tabBorder,
+  } = useContext(DashboardThemeContext);
+
+  // Fetch progress
   useEffect(() => {
-    // Only run if we have a valid User ID string
     if (profile?.id) {
-      let isMounted = true; 
+      let isMounted = true;
 
       const loadProgress = async () => {
         try {
-            const data = await getStudentProgressMap(profile.id);
-            if (isMounted) {
-                setProgressMap(data);
-                setLoadingProgress(false);
-            }
+          const data = await getStudentProgressMap(profile.id);
+          if (isMounted) {
+            setProgressMap(data);
+            setLoadingProgress(false);
+          }
         } catch (e) {
-            console.error("Failed to load progress stats", e);
+          console.error(e);
         }
       };
-      
-      loadProgress();
 
+      loadProgress();
       return () => { isMounted = false; };
     }
-    // Dependency on ID string prevents infinite loop
-  }, [profile?.id]); 
+  }, [profile?.id]);
 
-  // Helper: Get Greeting based on time
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
@@ -220,125 +231,180 @@ const Dashboard = () => {
     return "Good Evening";
   };
 
-  // Safe Data Handling
   const safeCourses = myCourses || [];
-  
-  // Filter Completed (100% progress)
-  const completedList = safeCourses.filter(item => (progressMap[item.course.id] || 0) === 100);
-  
-  // Filter In-Progress (< 100% progress)
-  const inProgressList = safeCourses.filter(item => (progressMap[item.course.id] || 0) < 100);
+
+  const completedList = safeCourses.filter(
+    item => (progressMap[item.course.id] || 0) === 100
+  );
+
+  const inProgressList = safeCourses.filter(
+    item => (progressMap[item.course.id] || 0) < 100
+  );
 
   return (
-    <div className="min-h-screen bg-purple-50"> 
+    <div
+      className="min-h-screen"
+      style={{ background: pageBg }}
+    >
       <div className='max-w-7xl mx-auto py-10 sm:py-12 px-4 sm:px-6'>
-        
-        <h1 className="mb-10 text-center text-3xl font-bold text-[#8300C4]">
+
+        {/* Heading */}
+        <h1
+          className="mb-10 text-center text-3xl font-bold"
+          style={{ color: heading }}
+        >
           YOUR DASHBOARD
         </h1>
 
-        {/* Greeting Section */}
-        <div className="mb-12 flex items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-purple-100">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#BA68C8] text-2xl font-semibold text-white shadow-md">
-            {profile?.full_name ? profile.full_name.charAt(0).toUpperCase() : "S"}
+        {/* Greeting Card */}
+        <div
+          className="mb-12 flex items-center gap-4 p-6 rounded-2xl shadow-sm border"
+          style={{
+            background: cardBg,
+            borderColor: cardBorder,
+          }}
+        >
+          <div
+            className="flex h-16 w-16 items-center justify-center rounded-full text-2xl font-semibold text-white shadow-md"
+            style={{ background: avatarBg }}
+          >
+            {profile?.full_name
+              ? profile.full_name.charAt(0).toUpperCase()
+              : "S"}
           </div>
+
           <div className='flex flex-col gap-1'>
-            <h2 className="text-2xl font-semibold text-gray-900">
+            <h2
+              className="text-2xl font-semibold"
+              style={{ color: textPrimary }}
+            >
               {getGreeting()}, {profile?.full_name || "Student"}
             </h2>
-            <p className="text-sm text-gray-600">
-              {profile?.role === 'student' 
+
+            <p style={{ color: textSecondary }}>
+              {profile?.role === 'student'
                 ? "Track your progress and continue learning."
                 : "Welcome back to your instructor dashboard."}
             </p>
           </div>
         </div>
 
+        {/* Courses Section */}
         <section>
-          <h3 className="mb-4 text-xl font-semibold text-gray-900">Your Courses</h3>
+          <h3
+            className="mb-4 text-xl font-semibold"
+            style={{ color: textPrimary }}
+          >
+            Your Courses
+          </h3>
 
           {/* Tabs */}
-          <div className="mb-10 mt-6 flex gap-4 border-b border-gray-200 pb-1">
-            <button 
-              className={`px-6 py-2 text-sm font-medium transition-all duration-200 border-b-2 ${
-                activeTab === "inProgress"
-                  ? "border-[#8300C4] text-[#8300C4]"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
+          <div
+            className="mb-10 mt-6 flex gap-4 border-b pb-1"
+            style={{ borderColor: tabBorder }}
+          >
+            <button
+              className="px-6 py-2 text-sm font-medium border-b-2"
+              style={{
+                borderColor:
+                  activeTab === "inProgress"
+                    ? tabActive
+                    : "transparent",
+                color:
+                  activeTab === "inProgress"
+                    ? tabActive
+                    : tabInactive,
+              }}
               onClick={() => setActiveTab("inProgress")}
             >
               In Progress
             </button>
 
-            <button 
-              className={`px-6 py-2 text-sm font-medium transition-all duration-200 border-b-2 ${
-                activeTab === "completed"
-                  ? "border-[#8300C4] text-[#8300C4]"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
+            <button
+              className="px-6 py-2 text-sm font-medium border-b-2"
+              style={{
+                borderColor:
+                  activeTab === "completed"
+                    ? tabActive
+                    : "transparent",
+                color:
+                  activeTab === "completed"
+                    ? tabActive
+                    : tabInactive,
+              }}
               onClick={() => setActiveTab("completed")}
             >
               Completed ({completedList.length})
             </button>
           </div>
 
-          {/* Tab Content: IN PROGRESS */}
+          {/* IN PROGRESS */}
           {activeTab === "inProgress" && (
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {inProgressList.length > 0 ? (
                 inProgressList.map((item) => (
-                  <div 
-                    key={item.course.id} 
-                    // Navigation logic: Go to Course Player
-                    onClick={() => navigate(`/course/${item.course.id}/learn`)}
-                    className="cursor-pointer transition-all duration-300 hover:-translate-y-1"
+                  <div
+                    key={item.course.id}
+                    onClick={() =>
+                      navigate(`/course/${item.course.id}/learn`)
+                    }
+                    className="cursor-pointer transition-all hover:-translate-y-1"
                   >
                     <Dashcard
                       title={item.course.title}
-                      subject={item.course.category || "General"} 
-                      grade={item.course.grade || "All Levels"} 
+                      subject={item.course.category || "General"}
+                      grade={item.course.grade || "All Levels"}
                       lessons={item.course.lessons_count || 0}
-                      // Pass the calculated progress
-                      progress={progressMap[item.course.id] || 0} 
+                      progress={
+                        progressMap[item.course.id] || 0
+                      }
                       thumbnail={item.course.thumbnail_url}
                     />
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-100 border-dashed">
-                  <p className="text-gray-500 mb-4 text-lg">You don't have any courses in progress.</p>
-                  <button 
-                    onClick={() => navigate("/courses")}
-                    className="text-[#8300C4] font-semibold hover:underline"
-                  >
-                    Browse Courses to Enroll
-                  </button>
+                <div
+                  className="col-span-full text-center py-16 rounded-2xl border border-dashed"
+                  style={{
+                    background: cardBg,
+                    borderColor: cardBorder,
+                    color: textSecondary,
+                  }}
+                >
+                  You don't have any courses in progress.
                 </div>
               )}
             </div>
           )}
 
-          {/* Tab Content: COMPLETED */}
+          {/* COMPLETED */}
           {activeTab === "completed" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {completedList.length > 0 ? (
                 completedList.map((item) => (
-                  <CompletedCourseCard 
-                    key={item.course.id} 
+                  <CompletedCourseCard
+                    key={item.course.id}
                     course={{
-                        ...item.course,
-                        mediaUrl: item.course.thumbnail_url
-                    }} 
+                      ...item.course,
+                      mediaUrl:
+                        item.course.thumbnail_url,
+                    }}
                   />
                 ))
               ) : (
-                <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-100 border-dashed">
-                  <p className="text-gray-500">No completed courses yet. Keep learning!</p>
+                <div
+                  className="col-span-full text-center py-16 rounded-2xl border border-dashed"
+                  style={{
+                    background: cardBg,
+                    borderColor: cardBorder,
+                    color: textSecondary,
+                  }}
+                >
+                  No completed courses yet.
                 </div>
               )}
             </div>
           )}
-
         </section>
       </div>
     </div>

@@ -7,152 +7,249 @@ export const CoursesThemeProvider = ({ children }) => {
   const { themeName } = useContext(ThemeContext);
 
   const coursesThemes = {
+    /* ---------------- LIGHT ---------------- */
     light: {
-      pageBg: "bg-[#FBF5FF]",
-      headingText: "text-gray-800",
+      /* Page */
+      pageBg: "#FBF5FF",
+      headerText: "#1F2937",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-black",
-      searchText: "text-gray-700",
+      /* Search */
+      searchBg: "#FFFFFF",
+      border: "#8B1CC342",
+      searchText: "#374151",
 
-      searchBtn:
-        "bg-purple-500 hover:bg-purple-600 text-white",
+      /* Buttons */
+      primaryBtn: "#A855F7",
+      primaryHover: "#9333EA",
 
-      filterActive:
-        "bg-purple-500 text-white",
+      /* Chips */
+      chipBg: "#A855F7",
+      chipText: "#FFFFFF",
+      chipBorder: "#A855F7",
 
-      filterInactive:
-        "border border-purple-500 text-purple-700 hover:bg-purple-50",
+      /* Card */
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.08)",
+
+      /* Tag */
+      tagBg: "#DBEAFE",
+      tagText: "#2563EB",
+
+      /* Text */
+      textPrimary: "#1F2937",
+      textSecondary: "#6B7280",
+
+      /* Gradient Button */
+      gradient:
+        "linear-gradient(90deg,#4846C6 0%,#DD9AFF 100%)",
     },
 
+    /* ---------------- DARK ---------------- */
     dark: {
-      pageBg: "bg-gray-900",
-      headingText: "text-white",
+      pageBg: "#111827",
+      headerText: "#F9FAFB",
 
-      searchBarBg: "bg-gray-800",
-      searchBorder: "border-gray-600",
-      searchText: "text-gray-200",
+      searchBg: "#1F2937",
+      border: "#374151",
+      searchText: "#E5E7EB",
 
-      searchBtn:
-        "bg-yellow-500 hover:bg-yellow-600 text-black",
+      primaryBtn: "#F59E0B",
+      primaryHover: "#D97706",
 
-      filterActive:
-        "bg-yellow-500 text-black",
+      chipBg: "#F59E0B",
+      chipText: "#000000",
+      chipBorder: "#F59E0B",
 
-      filterInactive:
-        "border border-yellow-400 text-yellow-300 hover:bg-gray-800",
+      cardBg: "#1F2937",
+      shadow: "0px 4px 16px rgba(0,0,0,0.5)",
+
+      tagBg: "#312E81",
+      tagText: "#C7D2FE",
+
+      textPrimary: "#F9FAFB",
+      textSecondary: "#9CA3AF",
+
+      gradient:
+        "linear-gradient(90deg,#6366F1 0%,#A78BFA 100%)",
     },
 
+    /* ---------------- OCEAN ---------------- */
     ocean: {
-      pageBg: "bg-blue-50",
-      headingText: "text-blue-900",
+      pageBg: "#EFF6FF",
+      headerText: "#1E3A8A",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-blue-400",
-      searchText: "text-blue-900",
+      searchBg: "#FFFFFF",
+      border: "#60A5FA",
+      searchText: "#1E3A8A",
 
-      searchBtn:
-        "bg-cyan-500 hover:bg-cyan-600 text-white",
+      primaryBtn: "#06B6D4",
+      primaryHover: "#0891B2",
 
-      filterActive:
-        "bg-cyan-500 text-white",
+      chipBg: "#06B6D4",
+      chipText: "#FFFFFF",
+      chipBorder: "#06B6D4",
 
-      filterInactive:
-        "border border-cyan-500 text-cyan-600 hover:bg-cyan-50",
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.1)",
+
+      tagBg: "#CFFAFE",
+      tagText: "#0891B2",
+
+      textPrimary: "#1E3A8A",
+      textSecondary: "#475569",
+
+      gradient:
+        "linear-gradient(90deg,#0EA5E9 0%,#22D3EE 100%)",
     },
 
+    /* ---------------- SUNSET ---------------- */
     sunset: {
-      pageBg: "bg-orange-50",
-      headingText: "text-orange-900",
+      pageBg: "#FFF7ED",
+      headerText: "#7C2D12",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-orange-400",
-      searchText: "text-orange-900",
+      searchBg: "#FFFFFF",
+      border: "#FB923C",
+      searchText: "#7C2D12",
 
-      searchBtn:
-        "bg-red-500 hover:bg-red-600 text-white",
+      primaryBtn: "#EF4444",
+      primaryHover: "#DC2626",
 
-      filterActive:
-        "bg-red-500 text-white",
+      chipBg: "#EF4444",
+      chipText: "#FFFFFF",
+      chipBorder: "#EF4444",
 
-      filterInactive:
-        "border border-red-400 text-red-500 hover:bg-red-50",
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.1)",
+
+      tagBg: "#FED7AA",
+      tagText: "#C2410C",
+
+      textPrimary: "#7C2D12",
+      textSecondary: "#9A3412",
+
+      gradient:
+        "linear-gradient(90deg,#F97316 0%,#EF4444 100%)",
     },
 
+    /* ---------------- FOREST ---------------- */
     forest: {
-      pageBg: "bg-green-50",
-      headingText: "text-green-900",
+      pageBg: "#F0FDF4",
+      headerText: "#14532D",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-green-400",
-      searchText: "text-green-900",
+      searchBg: "#FFFFFF",
+      border: "#4ADE80",
+      searchText: "#14532D",
 
-      searchBtn:
-        "bg-lime-500 hover:bg-lime-600 text-white",
+      primaryBtn: "#22C55E",
+      primaryHover: "#16A34A",
 
-      filterActive:
-        "bg-lime-500 text-white",
+      chipBg: "#22C55E",
+      chipText: "#FFFFFF",
+      chipBorder: "#22C55E",
 
-      filterInactive:
-        "border border-lime-500 text-lime-600 hover:bg-lime-50",
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.1)",
+
+      tagBg: "#DCFCE7",
+      tagText: "#15803D",
+
+      textPrimary: "#14532D",
+      textSecondary: "#166534",
+
+      gradient:
+        "linear-gradient(90deg,#22C55E 0%,#4ADE80 100%)",
     },
 
+    /* ---------------- ROYAL ---------------- */
     royal: {
-      pageBg: "bg-purple-50",
-      headingText: "text-purple-900",
+      pageBg: "#FAF5FF",
+      headerText: "#581C87",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-purple-400",
-      searchText: "text-purple-900",
+      searchBg: "#FFFFFF",
+      border: "#C084FC",
+      searchText: "#581C87",
 
-      searchBtn:
-        "bg-pink-500 hover:bg-pink-600 text-white",
+      primaryBtn: "#A855F7",
+      primaryHover: "#9333EA",
 
-      filterActive:
-        "bg-pink-500 text-white",
+      chipBg: "#A855F7",
+      chipText: "#FFFFFF",
+      chipBorder: "#A855F7",
 
-      filterInactive:
-        "border border-pink-500 text-pink-500 hover:bg-pink-50",
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.1)",
+
+      tagBg: "#F3E8FF",
+      tagText: "#7E22CE",
+
+      textPrimary: "#581C87",
+      textSecondary: "#6B21A8",
+
+      gradient:
+        "linear-gradient(90deg,#A855F7 0%,#E879F9 100%)",
     },
 
+    /* ---------------- CANDY ---------------- */
     candy: {
-      pageBg: "bg-pink-50",
-      headingText: "text-pink-900",
+      pageBg: "#FFF1F2",
+      headerText: "#9D174D",
 
-      searchBarBg: "bg-white",
-      searchBorder: "border-pink-400",
-      searchText: "text-pink-900",
+      searchBg: "#FFFFFF",
+      border: "#F472B6",
+      searchText: "#9D174D",
 
-      searchBtn:
-        "bg-yellow-400 hover:bg-yellow-500 text-black",
+      primaryBtn: "#F472B6",
+      primaryHover: "#EC4899",
 
-      filterActive:
-        "bg-yellow-400 text-black",
+      chipBg: "#F472B6",
+      chipText: "#FFFFFF",
+      chipBorder: "#F472B6",
 
-      filterInactive:
-        "border border-yellow-400 text-yellow-500 hover:bg-yellow-50",
+      cardBg: "#FFFFFF",
+      shadow: "0px 4px 12px rgba(0,0,0,0.1)",
+
+      tagBg: "#FCE7F3",
+      tagText: "#BE185D",
+
+      textPrimary: "#9D174D",
+      textSecondary: "#BE185D",
+
+      gradient:
+        "linear-gradient(90deg,#F472B6 0%,#F9A8D4 100%)",
     },
 
+    /* ---------------- MIDNIGHT ---------------- */
     midnight: {
-      pageBg: "bg-indigo-950",
-      headingText: "text-white",
+      pageBg: "#020617",
+      headerText: "#E0E7FF",
 
-      searchBarBg: "bg-indigo-900",
-      searchBorder: "border-indigo-600",
-      searchText: "text-gray-200",
+      searchBg: "#0F172A",
+      border: "#4338CA",
+      searchText: "#C7D2FE",
 
-      searchBtn:
-        "bg-indigo-600 hover:bg-indigo-700 text-white",
+      primaryBtn: "#4F46E5",
+      primaryHover: "#4338CA",
 
-      filterActive:
-        "bg-indigo-600 text-white",
+      chipBg: "#4F46E5",
+      chipText: "#FFFFFF",
+      chipBorder: "#4F46E5",
 
-      filterInactive:
-        "border border-indigo-400 text-indigo-300 hover:bg-indigo-900",
+      cardBg: "#0F172A",
+      shadow: "0px 4px 20px rgba(0,0,0,0.7)",
+
+      tagBg: "#1E1B4B",
+      tagText: "#A5B4FC",
+
+      textPrimary: "#E0E7FF",
+      textSecondary: "#A5B4FC",
+
+      gradient:
+        "linear-gradient(90deg,#4F46E5 0%,#6366F1 100%)",
     },
   };
 
-  const theme = coursesThemes[themeName] || coursesThemes.light;
+  const theme =
+    coursesThemes[themeName] || coursesThemes.light;
 
   return (
     <CoursesThemeContext.Provider value={theme}>
