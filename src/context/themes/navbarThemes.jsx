@@ -8,7 +8,7 @@ export const NavbarThemeProvider = ({ children }) => {
 
   const navbarThemes = {
     light: {
-      bg: "bg-yellow-500",
+      bg: "bg-purple-300",
       text: "text-gray-800",
       logoText: "text-purple-700",
       menuText: "text-gray-700",

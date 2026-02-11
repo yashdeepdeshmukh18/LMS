@@ -131,6 +131,9 @@ import PaymentPage from './pages/Payment';
 import CertificatePage from './pages/CertificatePage';
 import SettingsPage from './pages/SettingsPage';
 import HelpCenter from './pages/HelpCenter';
+import AdminDashboard from './pages/AdminDashboard';
+import CourseAdmin from './pages/CourseAdmin';
+
 
 // Layouts
 import MainLayout from './Components/layout/MainLayout';     // <--- New Wrapper
@@ -190,6 +193,8 @@ function App() {
             <Route path="/quiz" element={<QuizPage/>}/> 
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/help" element={<HelpCenter />} />
+            <Route path='/adminDashboard' element={<AdminDashboard/>}/>
+            <Route path='/courseAdmin' element={<CourseAdmin/>} />
         </Route>
 
 
