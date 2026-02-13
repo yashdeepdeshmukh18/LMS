@@ -135,6 +135,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import CourseAdmin from './pages/CourseAdmin';
 import AdminPayment from './pages/AdminPayment'
 import AdminCertificate from './pages/AdminCertificate'
+import Instructor from './pages/Instructor'
+import SettingsCertificate from './pages/SettingsCertificate'
 
 
 // Layouts
@@ -199,6 +201,8 @@ function App() {
             <Route path='/courseAdmin' element={<CourseAdmin/>} />
             <Route path='/adminPayment' element={<AdminPayment />} />
             <Route path='/adminCertificate' element={<AdminCertificate/>} />
+            <Route path='/instructor' element={<Instructor/>} />
+            <Route path='/settingsCertificate' element={<SettingsCertificate/>} />
         </Route>
 
 
