@@ -131,12 +131,15 @@ import PaymentPage from './pages/Payment';
 import CertificatePage from './pages/CertificatePage';
 import SettingsPage from './pages/SettingsPage';
 import HelpCenter from './pages/HelpCenter';
+
+// admin pages
 import AdminDashboard from './pages/AdminDashboard';
 import CourseAdmin from './pages/CourseAdmin';
 import AdminPayment from './pages/AdminPayment'
 import AdminCertificate from './pages/AdminCertificate'
 import Instructor from './pages/Instructor'
 import SettingsCertificate from './pages/SettingsCertificate'
+import User from './pages/User'
 
 
 // Layouts
@@ -197,12 +200,15 @@ function App() {
             <Route path="/quiz" element={<QuizPage/>}/> 
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/help" element={<HelpCenter />} />
+            
+            {/* Admin routes */}
             <Route path='/adminDashboard' element={<AdminDashboard/>}/>
             <Route path='/courseAdmin' element={<CourseAdmin/>} />
             <Route path='/adminPayment' element={<AdminPayment />} />
             <Route path='/adminCertificate' element={<AdminCertificate/>} />
             <Route path='/instructor' element={<Instructor/>} />
             <Route path='/settingsCertificate' element={<SettingsCertificate/>} />
+            <Route path='/user' element={<User/>} />
         </Route>
 
 
