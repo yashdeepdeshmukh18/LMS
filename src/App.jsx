@@ -140,6 +140,7 @@ import AdminCertificate from './pages/AdminCertificate'
 import Instructor from './pages/Instructor'
 import SettingsCertificate from './pages/SettingsCertificate'
 import User from './pages/User'
+import CreateCourse from './pages/CreateCourse'
 
 
 // Layouts
@@ -209,6 +210,7 @@ function App() {
             <Route path='/instructor' element={<Instructor/>} />
             <Route path='/settingsCertificate' element={<SettingsCertificate/>} />
             <Route path='/user' element={<User/>} />
+            <Route path='/createCourse' element={< CreateCourse/>} />
         </Route>
 
 
