@@ -4,7 +4,7 @@ const ScheduleCard = ({
   handleDelete,
 })  => {
   return (
-    <div className="border rounded-xl p-4 bg-purple-50 shadow-sm">
+    <div className="border mt-6 rounded-xl p-4 bg-purple-50 shadow-sm">
 
       <div className="flex justify-between items-start flex-wrap gap-3">
         <h4 className="font-semibold text-gray-800">

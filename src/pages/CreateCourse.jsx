@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CourseSchedule from "../Components/Admin/CreateCourse/CourseSchedule";
+import CourseContentTab from '../Components/Admin/CreateCourse/CourseContentTab';
 import { ArrowLeft } from "lucide-react";
+import PricingPlanTab from "../Components/Admin/CreateCourse/PricingPlanTab";
 
 export default function CreateCourse() {
   const [activeTab, setActiveTab] = useState("schedule");
@@ -8,7 +10,7 @@ export default function CreateCourse() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-purple-200 p-4 md:p-6">
+    <div className="min-h-screen font-openSans bg-gradient-to-b from-sky-100 to-purple-200 p-4 md:p-6">
       
       <div className="max-w-7xl mx-auto">
 
@@ -59,17 +61,37 @@ export default function CreateCourse() {
             </button>
 
             {/* Content */}
-            <button className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200">
-              ✔ Course Content
+            <button
+            onClick={() => setActiveTab("courseContent")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition ${
+                activeTab === "courseContent"
+                  ? "bg-blue-100 text-blue-600 border-blue-300 shadow-sm"
+                  : "bg-gray-100 text-gray-600 border-gray-200"
+              }`}
+              >
+                  ✔ Course Content
             </button>
 
             {/* Pricing */}
-            <button className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200">
-              ⚡ Pricing Plan
+            <button 
+            onClick={() => setActiveTab("pricingPlan")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition ${
+                activeTab === "pricingPlan"
+                  ? "bg-blue-100 text-blue-600 border-blue-300 shadow-sm"
+                  : "bg-gray-100 text-gray-600 border-gray-200"
+              }`}        
+              >
+                  ⚡ Pricing Plan
             </button>
 
             {/* Quiz */}
-            <button className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200">
+            <button 
+            // onClick={() => setActiveTab("schedule")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition ${
+                activeTab === "kjhj"
+                  ? "bg-blue-100 text-blue-600 border-blue-300 shadow-sm"
+                  : "bg-gray-100 text-gray-600 border-gray-200"
+              }`}            >
               ❓ Create Quiz
             </button>
           </div>
@@ -78,6 +100,8 @@ export default function CreateCourse() {
         {/* Tab Content */}
         <div className="mt-6">
           {activeTab === "schedule" && <CourseSchedule />}
+          {activeTab === "courseContent" && <CourseContentTab/>}
+          {activeTab === "pricingPlan" && <PricingPlanTab/>}
         </div>
 
       </div>

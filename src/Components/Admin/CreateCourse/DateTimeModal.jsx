@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 
-const DateTimeModal = ({ onClose, onSave }) => {
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+const DateTimeModal = ({ onClose, onSave, initialData }) => {
+  const [startTime, setStartTime] = useState(
+    initialData?.startTime || ""
+  );
+
+  const [endTime, setEndTime] = useState(
+    initialData?.endTime || ""
+  );
+
+  const [startDate, setStartDate] = useState(
+    initialData?.startDate || ""
+  );
+
+  const [endDate, setEndDate] = useState(
+    initialData?.endDate || ""
+  );
+
 
   const handleSave = () => {
     if (!startTime || !endTime || !startDate) {

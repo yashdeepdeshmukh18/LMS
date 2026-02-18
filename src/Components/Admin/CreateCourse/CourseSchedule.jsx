@@ -59,10 +59,10 @@ const CourseSchedule = () => {
         } else {
             // Create
             const newSchedule = {
-            id: Date.now(),
-            content: selectedContent,
-            description,
-            dateTime,
+              id: Date.now(),
+              content: selectedContent,
+              description,
+              dateTime,
             };
 
             setSchedules((prev) => [...prev, newSchedule]);
@@ -156,6 +156,7 @@ const CourseSchedule = () => {
         <DateTimeModal 
             onClose={() => setOpenModal(false)} 
             onSave={(data) => setDateTime(data)}
+            initialData={dateTime}
         />
       )}
     </div>
