@@ -3,6 +3,7 @@ import CourseSchedule from "../Components/Admin/CreateCourse/CourseSchedule";
 import CourseContentTab from '../Components/Admin/CreateCourse/CourseContentTab';
 import { ArrowLeft } from "lucide-react";
 import PricingPlanTab from "../Components/Admin/CreateCourse/PricingPlanTab";
+import CreateQuizTab from '../Components/Admin/CreateCourse/CreateQuizTab'
 
 export default function CreateCourse() {
   const [activeTab, setActiveTab] = useState("schedule");
@@ -86,9 +87,9 @@ export default function CreateCourse() {
 
             {/* Quiz */}
             <button 
-            // onClick={() => setActiveTab("schedule")}
+            onClick={() => setActiveTab("quiz")}
               className={`px-4 py-2 rounded-lg text-sm font-medium border transition ${
-                activeTab === "kjhj"
+                activeTab === "quiz"
                   ? "bg-blue-100 text-blue-600 border-blue-300 shadow-sm"
                   : "bg-gray-100 text-gray-600 border-gray-200"
               }`}            >
@@ -102,6 +103,7 @@ export default function CreateCourse() {
           {activeTab === "schedule" && <CourseSchedule />}
           {activeTab === "courseContent" && <CourseContentTab/>}
           {activeTab === "pricingPlan" && <PricingPlanTab/>}
+          {activeTab === "quiz" && <CreateQuizTab/>}
         </div>
 
       </div>
